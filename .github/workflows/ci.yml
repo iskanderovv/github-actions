@@ -1,0 +1,29 @@
+name: Next.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Kodni yuklash
+        uses: actions/checkout@v3
+
+      - name: Node o‘rnatish
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Paketlarni o‘rnatish
+        run: npm ci
+
+      - name: Lint tekshiruvi
+        run: npm run lint
+
+      - name: Build qilish
+        run: npm run build
